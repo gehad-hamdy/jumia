@@ -1,0 +1,23 @@
+version: '3.0'
+services:
+  jumia:
+    build: .
+    ports:
+      - "3400:3000"
+    networks:
+      - jumia
+  db:
+    image: "postgres:11"
+    container_name: "jumia_postgres"
+    ports:
+      - "5433:5432"
+    volumes:
+      - my_dbdata:/var/lib/postgresql/data
+    networks:
+      - jumia
+volumes:
+  my_dbdata:
+
+networks:
+  jumia:
+    driver: bridge
